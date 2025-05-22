@@ -89,16 +89,14 @@
   <?php 
     require_once 'db.php';
     $db = new DB();
-
     if($_SERVER["REQUEST_METHOD"] == 'POST'){
       $task = $_POST["task"];
-      $now = date("Y-m-d",time());
+      $now = date("Y-m-d H:i:s",time());
       $sql = "INSERT INTO todo (name, status, created_at, updated_at) VALUES ('$task', False, '$now', '$now')";
      
       $db->update($sql);
-    }else if ($_SERVER["REQUEST_METHOD"] == 'GET'){
-      $tasks = $db->select("SELECT * FROM todo");
     }
+    $tasks = $db->select("SELECT * FROM todo ORDER BY created_at Desc");
 
     
   ?>
