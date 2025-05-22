@@ -88,13 +88,16 @@
 <body>
   <?php 
     require_once 'db.php';
+    $db = new DB();
 
     if($_SERVER["REQUEST_METHOD"] == 'POST'){
       $task = $_POST["task"];
       $now = date("Y-m-d",time());
       $sql = "INSERT INTO todo (name, status, created_at, updated_at) VALUES ('$task', False, '$now', '$now')";
-      $db = new DB();
+     
       $db->update($sql);
+    }else if ($_SERVER["REQUEST_METHOD"] == 'GET'){
+      $tasks = $db->select("SELECT * FROM todo");
     }
 
     
@@ -106,11 +109,13 @@
       <button type="sumbit">Add</button>
     </form>
     <ul id="taskList">
-        <li>
-            <span class="task done">sdf</span>
+        <?php foreach ($tasks as $task): ?>
+          <li>
+            <span class="task <?= $task['status'] == 1 ? "done" : ""  ?>"><?= $task['name'] ?></span>
             <button class="done-btn">Done</button>
             <button class="delete-btn">Delete</button>
-        </li>
+           </li>
+        <?php endforeach; ?>
     </ul>
   </div>
 </body>
