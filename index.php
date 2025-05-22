@@ -86,13 +86,25 @@
   </style>
 </head>
 <body>
+  <?php 
+    require_once 'db.php';
 
+    if($_SERVER["REQUEST_METHOD"] == 'POST'){
+      $task = $_POST["task"];
+      $now = date("Y-m-d",time());
+      $sql = "INSERT INTO todo (name, status, created_at, updated_at) VALUES ('$task', False, '$now', '$now')";
+      $db = new DB();
+      $db->update($sql);
+    }
+
+    
+  ?>
   <div class="todo-container">
     <h2>To-Do List</h2>
-    <div>
-      <input type="text" id="taskInput" placeholder="Add a new task...">
-      <button onclick="addTask()">Add</button>
-    </div>
+    <form action="/" method="POST">
+      <input type="text" name="task" placeholder="Add a new task...">
+      <button type="sumbit">Add</button>
+    </form>
     <ul id="taskList">
         <li>
             <span class="task done">sdf</span>
