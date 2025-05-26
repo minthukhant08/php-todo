@@ -1,14 +1,16 @@
 <?php 
-require_once 'controller/TodoController.php';
+
+use Todo\Controller\TodoController;
 
 $url = $_SERVER["REQUEST_URI"];
 
 switch ($url) {
     case '/todo':
+        $todoController = new TodoController();
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            create();
+            $todoController->create();
         }else{
-            index();
+            $todoController->index();
         }
         break;
     // case '/todo/update':

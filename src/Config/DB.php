@@ -1,4 +1,8 @@
 <?php 
+namespace Todo\Config;
+
+use PDO;
+use PDOException;
 class DB {
     private static $servername = "localhost";
     private static $username = "root";

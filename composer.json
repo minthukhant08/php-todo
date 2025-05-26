@@ -1,0 +1,17 @@
+{
+    "name": "minthukhant/todo",
+    "autoload": {
+        "psr-4": {
+            "Todo\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Min Thu Khant",
+            "email": "minthukhant@aceplussolutions.com"
+        }
+    ],
+    "require": {
+        "ramsey/uuid": "^4.7"
+    }
+}
